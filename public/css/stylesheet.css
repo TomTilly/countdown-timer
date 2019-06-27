@@ -33,12 +33,16 @@ body {
 
 .time-picker-container__btn {
   width: 30%;
-  background: rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.1);
   border: 2px solid rgba(255, 255, 255, 0.575);
   padding: 1.5rem 1rem;
   border-radius: 5px;
   color: rgba(255, 255, 255, 0.8);
   font-size: 1.75rem;
+}
+
+.time-picker-container__btn:hover {
+  background: rgba(0, 0, 0, 0.185);
 }
 
 .time-picker-container__custom-form {
