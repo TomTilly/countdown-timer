@@ -11,14 +11,23 @@
   <link rel="stylesheet" href="/css/stylesheet.css" type="text/css">
 </head>
 
-<body>
-
-  <div class="time-picker-container">
-    <button class="time-picker-container__btn">15 minutes</button>
-    <button class="time-picker-container__btn">30 minutes</button>
-    <form class="time-picker-container__custom-form">
-      <input type="text" class="time-picker-container__input" placeholder="Enter Custom Minutes...">
-    </form>
+<body class="page">
+  <div class="timer page__inner">
+    <div class="timer__input-container">
+      <button class="timer__button">15 minutes</button>
+      <button class="timer__button">30 minutes</button>
+      <form class="timer__custom-min-form custom-min-form">
+        <input type="text" class="custom-min-form__input" placeholder="Enter Custom Min...">
+      </form>
+    </div>
+    <div class="timer__display">
+      <div class="timer__countdown">
+        <span class="timer__minutes">5</span><span class="timer__colon">:</span><span class="timer__seconds">30</span>
+      </div>
+      <div class="timer__message">
+        Be back at <span class="timer__end-time">3:08</span>
+      </div>
+    </div>
   </div>
   <script src="/js/main.js"></script>
 </body>

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/TomTilly/countdown-timer#readme",
   "dependencies": {
+    "browser-sync": "^2.26.7",
     "ejs": "^2.6.2",
     "express": "^4.17.1",
     "nodemon": "^1.19.1"

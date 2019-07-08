@@ -1,5 +1,5 @@
 /* Normalize CSS v8.0.0 */
-button,hr,input{overflow:visible}progress,sub,sup{vertical-align:baseline}[type=checkbox],[type=radio],legend{box-sizing:border-box;padding:0}html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:bolder}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:ButtonText dotted 1px}fieldset{padding:.35em .75em .625em}legend{color:inherit;display:table;max-width:100%;white-space:normal}textarea{overflow:auto}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}[hidden],template{display:none}
+timer__button,hr,input{overflow:visible}progress,sub,sup{vertical-align:baseline}[type=checkbox],[type=radio],legend{box-sizing:border-box;padding:0}html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:bolder}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}timer__button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}timer__button,select{text-transform:none}[type=timer__button],[type=reset],[type=submit],timer__button{-webkit-appearance:timer__button}[type=timer__button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,timer__button::-moz-focus-inner{border-style:none;padding:0}[type=timer__button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,timer__button:-moz-focusring{outline:timer__buttonText dotted 1px}fieldset{padding:.35em .75em .625em}legend{color:inherit;display:table;max-width:100%;white-space:normal}textarea{overflow:auto}[type=number]::-webkit-inner-spin-timer__button,[type=number]::-webkit-outer-spin-timer__button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-timer__button{-webkit-appearance:timer__button;font:inherit}details{display:block}summary{display:list-item}[hidden],template{display:none}
 
 /* Global Styles */
 
@@ -7,7 +7,7 @@ html {
   box-sizing: border-box;
 }
 
-*, *:before, *:after {
+*, *::before, *::after {
   box-sizing: inherit;
 }
 
@@ -24,14 +24,18 @@ body {
   font-family: 'Oswald', sans-serif;
 }
 
-.time-picker-container {
-  display: flex;
-  margin: 200px auto;
+.page__inner {
+  padding-top: 300px;
+  margin: 0 auto;
   width: 75%;
+}
+
+.timer__input-container {
+  display: flex;
   justify-content: space-between;
 }
 
-.time-picker-container__btn {
+.timer__button {
   width: 30%;
   background: rgba(0, 0, 0, 0.1);
   border: 2px solid rgba(255, 255, 255, 0.575);
@@ -39,17 +43,24 @@ body {
   border-radius: 5px;
   color: rgba(255, 255, 255, 0.8);
   font-size: 1.75rem;
+  z-index: 2; /* makes sure a timer__button cursor looks right if a large text box overlaps it, like .timer-display */
+  font-family: 'Oswald', sans-serif;
 }
 
-.time-picker-container__btn:hover {
+.timer__button:focus {
+  outline: none;
+}
+
+.timer__button:hover {
   background: rgba(0, 0, 0, 0.185);
+  cursor: pointer;
 }
 
-.time-picker-container__custom-form {
+.timer__custom-min-form {
   width: 30%;
 }
 
-.time-picker-container__input {
+.custom-min-form__input {
   border: 2px solid rgba(255, 255, 255, 0.575);
   border-radius: 5px;
   width: 100%;
@@ -61,6 +72,39 @@ body {
   font-size: 1.75rem;
 }
 
-.time-picker-container__input::placeholder {
+.custom-min-form__input::placeholder {
   color: rgba(255, 255, 255, 0.589)
+}
+
+.timer__display {
+  color: white;
+  text-align: center;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.timer__countdown {
+  font-size: 200px;
+}
+
+.timer__message {
+  font-size: 3rem;
+}
+
+@media (max-width: 992px) {
+  .page__inner {
+    padding-top: 100px;
+  }
+
+  .timer__input-container {
+    flex-direction: column;
+    align-items: center;
+    height: 300px;
+  }
+
+  .timer__button, .timer__custom-min-form {
+    width: 75%;
+  }
 }
