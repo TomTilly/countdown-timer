@@ -25,11 +25,10 @@ function updateTimerDisplay() {
 }
 
 function displayEndTime() {
-  const endTime = new Date(then);
-  const endHour = endTime.getHours();
-  const endMin = endTime.getMinutes();
-  const endTimeDisplay = `${endHour}:${endMin < 10 ? '0' : ''}${endMin}`;
-  endTimeEl.textContent = endTimeDisplay;
+  const end = new Date(then);
+  const endHour = end.getHours();
+  const endMin = end.getMinutes();
+  endTimeEl.textContent = `${endHour}:${endMin < 10 ? '0' : ''}${endMin}`;;
 }
 
 function decrementTimer() {
