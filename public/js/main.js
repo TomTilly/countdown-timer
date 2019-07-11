@@ -20,11 +20,13 @@ function decrementTimer() {
   if (totalTimeInSeconds === 0) {
     clearInterval(intervalID);
   }
+  updateTimerDisplay();
+}
 
+function updateTimerDisplay() {
   const secondsToDisplay = getSeconds(totalTimeInSeconds);
   minText.textContent = getMinutes(totalTimeInSeconds);
   secondsText.textContent = secondsToDisplay > 10 ? secondsToDisplay : `0${secondsToDisplay}`;
-  console.log(totalTimeInSeconds);
 }
 
 function startTimer(e) {
@@ -38,8 +40,8 @@ function startTimer(e) {
   if (totalTimeInSeconds > 3600) {
     return;
   }
+  updateTimerDisplay();
   intervalID = setInterval(decrementTimer, 1000);
-
 }
 
 buttons.forEach(button => button.addEventListener('click', startTimer));
