@@ -21,6 +21,7 @@ function updateTimerDisplay() {
   const mins = getMinutes(totalTimeInSeconds);
   const display = `${mins}:${seconds < 10 ? '0' : ''}${seconds}`;
   timerDisplay.textContent = display;
+  document.title = display;
 }
 
 function decrementTimer() {
