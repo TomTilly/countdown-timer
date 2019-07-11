@@ -3,6 +3,8 @@ const customMinForm = document.querySelector('.custom-min-form');
 const customMinInput = customMinForm.querySelector('.custom-min-form__input');
 let minText = document.querySelector('.timer__minutes');
 let secondsText = document.querySelector('.timer__seconds');
+let now;
+let then;
 let totalTimeInSeconds;
 let intervalID;
 let endTime;
@@ -22,7 +24,8 @@ function updateTimerDisplay() {
 }
 
 function decrementTimer() {
-  totalTimeInSeconds -= 1;
+  totalTimeInSeconds = Math.round((then - Date.now()) / 1000);
+  console.log(totalTimeInSeconds);
   if (totalTimeInSeconds === 0) {
     clearInterval(intervalID);
   }
@@ -31,15 +34,21 @@ function decrementTimer() {
 
 function startTimer(e) {
   e.preventDefault();
+
+  // If a timer is already running, cancel it
   if (intervalID) {
     clearInterval(intervalID);
   }
 
-  // dataset.time will be undefined if form is submitted, so get value from form input
+  // dataset.time will be undefined if form is submitted, in which case get value from form input
   totalTimeInSeconds = parseInt((e.target.dataset.time || customMinInput.value), 10) * 60;
+
+  // Only handle input < 1 hour
   if (totalTimeInSeconds > 3600) {
     return;
   }
+  now = Date.now();
+  then = now + (totalTimeInSeconds * 1000);
   updateTimerDisplay();
   intervalID = setInterval(decrementTimer, 1000);
 }
