@@ -34,6 +34,11 @@ function decrementTimer() {
 function startTimer(e) {
   e.preventDefault();
 
+  // Only handle input < 1 hour
+  if (totalTimeInSeconds > 3600) {
+    return;
+  }
+
   // If a timer is already running, cancel it
   if (intervalID) {
     clearInterval(intervalID);
@@ -41,20 +46,15 @@ function startTimer(e) {
 
   // dataset.time will be undefined if form is submitted, in which case get value from form input
   totalTimeInSeconds = parseInt((e.target.dataset.time || customMinInput.value), 10) * 60;
-
-  // Only handle input < 1 hour
-  if (totalTimeInSeconds > 3600) {
-    return;
-  }
   now = Date.now();
   then = now + (totalTimeInSeconds * 1000);
+  updateTimerDisplay();
+  intervalID = setInterval(decrementTimer, 1000);
   const endTime = new Date(then);
   const endHour = endTime.getHours();
   const endMin = endTime.getMinutes();
   const endTimeDisplay = `${endHour}:${endMin < 10 ? '0' : ''}${endMin}`;
   endTimeEl.textContent = endTimeDisplay;
-  updateTimerDisplay();
-  intervalID = setInterval(decrementTimer, 1000);
 }
 
 buttons.forEach(button => button.addEventListener('click', startTimer));
