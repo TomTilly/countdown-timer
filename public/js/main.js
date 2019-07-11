@@ -1,13 +1,13 @@
 const buttons = document.querySelectorAll('.timer__button');
 const customMinForm = document.querySelector('.custom-min-form');
 const customMinInput = customMinForm.querySelector('.custom-min-form__input');
-let minText = document.querySelector('.timer__minutes');
-let secondsText = document.querySelector('.timer__seconds');
+const endTimeEl = document.querySelector('.timer__end-time');
+const minTextEl = document.querySelector('.timer__minutes');
+const secondsTextEl = document.querySelector('.timer__seconds');
 let now;
 let then;
 let totalTimeInSeconds;
 let intervalID;
-let endTime;
 
 function getMinutes(timeInSeconds) {
   return Math.floor(timeInSeconds / 60);
@@ -19,8 +19,8 @@ function getSeconds(timeInSeconds) {
 
 function updateTimerDisplay() {
   const secondsToDisplay = getSeconds(totalTimeInSeconds);
-  minText.textContent = getMinutes(totalTimeInSeconds);
-  secondsText.textContent = secondsToDisplay > 10 ? secondsToDisplay : `0${secondsToDisplay}`;
+  minTextEl.textContent = getMinutes(totalTimeInSeconds);
+  secondsTextEl.textContent = secondsToDisplay > 10 ? secondsToDisplay : `0${secondsToDisplay}`;
 }
 
 function decrementTimer() {
@@ -49,7 +49,9 @@ function startTimer(e) {
   }
   now = Date.now();
   then = now + (totalTimeInSeconds * 1000);
+  const endTime = new Date(then);
   updateTimerDisplay();
+  endTimeEl.textContent = `${endTime.getHours()}:${endTime.getMinutes()}`;
   intervalID = setInterval(decrementTimer, 1000);
 }
 
