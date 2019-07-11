@@ -34,6 +34,9 @@ function decrementTimer() {
 function startTimer(e) {
   e.preventDefault();
 
+  // dataset.time will be undefined if form is submitted, in which case get value from form input
+  totalTimeInSeconds = parseInt((e.target.dataset.time || customMinInput.value), 10) * 60;
+
   // Only handle input < 1 hour
   if (totalTimeInSeconds > 3600) {
     return;
@@ -44,8 +47,6 @@ function startTimer(e) {
     clearInterval(intervalID);
   }
 
-  // dataset.time will be undefined if form is submitted, in which case get value from form input
-  totalTimeInSeconds = parseInt((e.target.dataset.time || customMinInput.value), 10) * 60;
   now = Date.now();
   then = now + (totalTimeInSeconds * 1000);
   updateTimerDisplay();
