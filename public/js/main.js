@@ -24,6 +24,14 @@ function updateTimerDisplay() {
   document.title = display;
 }
 
+function displayEndTime() {
+  const endTime = new Date(then);
+  const endHour = endTime.getHours();
+  const endMin = endTime.getMinutes();
+  const endTimeDisplay = `${endHour}:${endMin < 10 ? '0' : ''}${endMin}`;
+  endTimeEl.textContent = endTimeDisplay;
+}
+
 function decrementTimer() {
   totalTimeInSeconds = Math.round((then - Date.now()) / 1000);
   if (totalTimeInSeconds === 0) {
@@ -51,12 +59,8 @@ function startTimer(e) {
   now = Date.now();
   then = now + (totalTimeInSeconds * 1000);
   updateTimerDisplay();
+  displayEndTime();
   intervalID = setInterval(decrementTimer, 1000);
-  const endTime = new Date(then);
-  const endHour = endTime.getHours();
-  const endMin = endTime.getMinutes();
-  const endTimeDisplay = `${endHour}:${endMin < 10 ? '0' : ''}${endMin}`;
-  endTimeEl.textContent = endTimeDisplay;
 }
 
 buttons.forEach(button => button.addEventListener('click', startTimer));
