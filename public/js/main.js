@@ -51,4 +51,7 @@ function startTimer(e) {
 
 buttons.forEach(button => button.addEventListener('click', startTimer));
 
-customMinForm.addEventListener('submit', startTimer);
+customMinForm.addEventListener('submit', function (e) {
+  startTimer(e);
+  this.reset();
+});
