@@ -15,18 +15,18 @@ function getSeconds(timeInSeconds) {
   return timeInSeconds % 60;
 }
 
+function updateTimerDisplay() {
+  const secondsToDisplay = getSeconds(totalTimeInSeconds);
+  minText.textContent = getMinutes(totalTimeInSeconds);
+  secondsText.textContent = secondsToDisplay > 10 ? secondsToDisplay : `0${secondsToDisplay}`;
+}
+
 function decrementTimer() {
   totalTimeInSeconds -= 1;
   if (totalTimeInSeconds === 0) {
     clearInterval(intervalID);
   }
   updateTimerDisplay();
-}
-
-function updateTimerDisplay() {
-  const secondsToDisplay = getSeconds(totalTimeInSeconds);
-  minText.textContent = getMinutes(totalTimeInSeconds);
-  secondsText.textContent = secondsToDisplay > 10 ? secondsToDisplay : `0${secondsToDisplay}`;
 }
 
 function startTimer(e) {
