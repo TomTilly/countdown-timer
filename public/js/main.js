@@ -26,9 +26,9 @@ function updateTimerDisplay() {
 
 function displayEndTime() {
   const end = new Date(then);
-  const endHour = end.getHours();
-  const endMin = end.getMinutes();
-  endTimeEl.textContent = `${endHour}:${endMin < 10 ? '0' : ''}${endMin}`;;
+  const hour = end.getHours();
+  const minutes = end.getMinutes();
+  endTimeEl.textContent = `${hour}:${minutes < 10 ? '0' : ''}${minutes}`;
 }
 
 function decrementTimer() {
