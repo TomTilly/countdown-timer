@@ -3,6 +3,7 @@ const customMinForm = document.querySelector('.custom-min-form');
 const customMinInput = customMinForm.querySelector('.custom-min-form__input');
 const endTimeEl = document.querySelector('.timer__end-time');
 const timerDisplay = document.querySelector('.timer__countdown');
+let intervalID;
 
 function updateTimerDisplay(secondsLeft) {
   const seconds = secondsLeft % 60;
@@ -39,7 +40,7 @@ function startTimer(e) {
   const then = now + (totalSeconds * 1000);
   updateTimerDisplay(totalSeconds);
   displayEndTime(then);
-  const intervalID = setInterval(() => {
+  intervalID = setInterval(() => {
     const secondsLeft = Math.round((then - Date.now()) / 1000);
     if (secondsLeft === 0) {
       clearInterval(intervalID);
